@@ -43,7 +43,13 @@ def convert_to_dataset(file_path):
 
     _, file_name = os.path.split(abs_file_path_no_ext)
 
-    abs_path, title = str(Path(abs_file_path_no_ext).parent.resolve()) + "/"
+    try:
+        _, title = file_name.split("DTN profile ")
+    except:
+        print("Could not find 'DTN profiles' to split on. Using full file name.")
+        title = file_name
+
+    abs_path = str(Path(abs_file_path_no_ext).parent.resolve()) + "/"
 
     try:
         _, markdown = result.value.split("\n\nDescription ")
