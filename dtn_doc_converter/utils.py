@@ -25,13 +25,12 @@ def convert_files_in_dir(file_path):
 
     for file in os.listdir(file_path):
         if file.endswith(".doc") or file.endswith(".docx"):
-            print(file)
+            print(f"Converting {file}...")
             file_abs_path = os.path.abspath(file_path + file)
-            print(file_abs_path)
             convert_to_dataset(file_abs_path)
         else:
             print(f"File: {file} not .doc or .docx. Skipping conversion")
-    
+
 
 def convert_to_dataset(file_path):
 
@@ -65,5 +64,7 @@ def convert_to_dataset(file_path):
         "version": "datasets/v0.2"        
     }
 
-    with open(abs_path + file_name.lower().replace(' ', '-') + '.yml', "w") as yaml_file:
+    dataset_path = abs_path + file_name.lower().replace(' ', '-')
+
+    with open(dataset_path + '.yml', "w") as yaml_file:
         yaml.dump(dataset, yaml_file, default_flow_style=False)
