@@ -45,7 +45,7 @@ def convert_to_dataset(file_path):
     try:
         title, _ = result.value.split("<a", 1)
         _, title = title.split(" ", 1)
-        title = title.strip()
+        title = title.replace("\\", "").strip()
     except:
         print("Could not find heading 3 title, default to using file name as title.")
         title = file_name
