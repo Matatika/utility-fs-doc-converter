@@ -43,7 +43,7 @@ def convert_to_dataset(file_path):
     _, file_name = os.path.split(abs_file_path_no_ext)
 
     try:
-        title, _ = result.value.split("<a", 1)
+        title, _ = result.value.split("\\-\\-\\-", 1)
         _, title = title.split(" ", 1)
         title = title.replace("\\", "").strip()
     except:
