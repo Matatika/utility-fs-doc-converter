@@ -43,23 +43,16 @@ def convert_to_dataset(file_path):
     _, file_name = os.path.split(abs_file_path_no_ext)
 
     try:
-        _, title = file_name.split("DTN profile ")
+        title, _ = result.value.split("\n")
     except:
-        print("Could not find 'DTN profiles' to split on. Using full file name.")
+        print("Could not find heading 3 title, default to using file name as title.")
         title = file_name
 
     abs_path = str(Path(abs_file_path_no_ext).parent.resolve()) + "/"
 
-    try:
-        _, markdown = result.value.split("\n\nDescription ")
-        markdown = "![" + markdown
-    except:
-        print("Cannot find image at top of profile. Attempting raw conversion.")
-        markdown = result.value
-
     dataset = {
-        "description": markdown,
-        "source": "DTN Profiles",
+        "description": result.value,
+        "source": "Qual",
         "title": title,
         "version": "datasets/v0.2"        
     }
